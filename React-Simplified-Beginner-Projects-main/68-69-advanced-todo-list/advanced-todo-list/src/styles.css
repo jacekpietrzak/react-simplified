@@ -1,0 +1,89 @@
+#new-todo-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}
+
+#new-todo-form > * {
+  margin: 0.15rem;
+}
+
+.new-todo-form.error .input {
+  border-color: hsl(0, 100%, 70%);
+  color: hsl(0, 100%, 70%);
+  background: hsl(0, 100%, 95%);
+}
+
+.new-todo-form.error .label {
+  color: hsl(0, 100%, 70%);
+}
+
+.new-todo-form.error .msg {
+  font-size: 0.8em;
+  color: hsl(0, 100%, 70%);
+}
+
+#list {
+  padding: 0;
+}
+
+.label {
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+.input {
+  all: unset;
+  border: 0.05em solid black;
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+}
+
+.input:focus {
+  border-color: hsl(200, 100%, 50%);
+}
+
+.list-item {
+  list-style: none;
+}
+
+.list-item-label:hover,
+[data-list-item-checkbox]:hover {
+  cursor: pointer;
+}
+
+.list-item-label:hover > [data-list-item-text] {
+  color: #333;
+  text-decoration: line-through;
+}
+
+[data-list-item-checkbox]:checked ~ [data-list-item-text] {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+[data-button-delete] {
+  margin-left: 0.5rem;
+}
+
+button {
+  cursor: pointer;
+}
+
+[data-button-edit] {
+  margin-left: 0.5rem;
+}
+
+.filter-form {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding-bottom: 0.5rem;
+}
+
+.filter-form-group {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
