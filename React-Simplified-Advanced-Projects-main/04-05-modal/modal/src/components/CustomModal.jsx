@@ -4,7 +4,10 @@ import { createPortal } from 'react-dom';
 export function CustomModal({ isOpen, onClose, children }) {
   useEffect(() => {
     function handler(e) {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        console.log('click');
+        onClose();
+      }
     }
 
     document.addEventListener('keydown', handler);

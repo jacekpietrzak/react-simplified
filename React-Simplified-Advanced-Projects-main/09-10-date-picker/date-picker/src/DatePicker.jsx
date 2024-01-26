@@ -18,17 +18,17 @@ export function DatePicker({ value, onChange }) {
     <div className="date-picker-container">
       <button
         className="date-picker-button"
-        onClick={() => setIsOpen((o) => !o)}
+        onClick={() => setIsOpen((isOpen) => !isOpen)}
       >
         {value == null ? 'Select a Date' : format(value, 'MMM do, yyyy')}
       </button>
-      {isOpen && <DatePickerModal onChange={onChange} value={value} />}
+      {isOpen && <DatePickerModal value={value} onChange={onChange} />}
     </div>
   );
 }
 
 function DatePickerModal({ value, onChange }) {
-  const [visibleMonth, setVisibleMonth] = useState(value || new Date());
+  const [visibleMonth, setVisibleMonth] = useState(new Date());
 
   const visibleDates = eachDayOfInterval({
     start: startOfWeek(startOfMonth(visibleMonth)),
@@ -40,10 +40,9 @@ function DatePickerModal({ value, onChange }) {
       return addMonths(currentMonth, -1);
     });
   }
-
   function showNextMonth() {
     setVisibleMonth((currentMonth) => {
-      return addMonths(currentMonth, 1);
+      return addMonths(currentMonth, +1);
     });
   }
 
@@ -76,19 +75,24 @@ function DatePickerModal({ value, onChange }) {
         <div>Sat</div>
       </div>
       <div className="date-picker-grid-dates date-picker-grid">
-        {visibleDates.map((date) => (
-          <button
-            onClick={() => onChange(date)}
-            className={`date ${
-              !isSameMonth(date, visibleMonth) && 'date-picker-other-month-date'
-            } ${isSameDay(date, value) && 'selected'} ${
-              isToday(date) && 'today'
-            }`}
-            key={date.toDateString()}
-          >
-            {date.getDate()}
-          </button>
-        ))}
+        {visibleDates.map((date) => {
+          return (
+            <button
+              onClick={() => onChange(date)}
+              className={`date ${
+                isSameMonth(date, visibleMonth)
+                  ? ''
+                  : 'date-picker-other-month-date'
+              } ${isSameDay(date, value) ? 'selected' : ''} ${
+                isToday(date) ? 'today' : ''
+              }
+                      `}
+              key={date.toDateString()}
+            >
+              {date.getDate()}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
